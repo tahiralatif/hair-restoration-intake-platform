@@ -7,22 +7,19 @@ import { FormField } from '@/components/ui/form-field';
 import { Button } from '@/components/ui/button';
 import { PersonalInfo, Gender } from '@/lib/types';
 import { validateEmail, validatePhone, validateRequired, validateAge } from '@/lib/validation';
+import { useAssessment } from '@/lib/contexts/AssessmentContext';
 
-interface Step1Props {
-  data?: Partial<PersonalInfo>;
-  onNext: (data: PersonalInfo) => void;
-}
-
-export function Step1PersonalInfo({ data, onNext }: Step1Props) {
+export function Step1PersonalInfo() {
+  const { state, actions } = useAssessment();
   const [formData, setFormData] = useState<Partial<PersonalInfo>>({
-    firstName: data?.firstName || '',
-    lastName: data?.lastName || '',
-    email: data?.email || '',
-    phone: data?.phone || '',
-    dateOfBirth: data?.dateOfBirth || '',
-    age: data?.age || 0,
-    gender: data?.gender || 'male',
-    address: data?.address || {
+    firstName: state.formData.personalInfo?.firstName || '',
+    lastName: state.formData.personalInfo?.lastName || '',
+    email: state.formData.personalInfo?.email || '',
+    phone: state.formData.personalInfo?.phone || '',
+    dateOfBirth: state.formData.personalInfo?.dateOfBirth || '',
+    age: state.formData.personalInfo?.age || 0,
+    gender: state.formData.personalInfo?.gender || 'male',
+    address: state.formData.personalInfo?.address || {
       street: '',
       city: '',
       state: '',
@@ -122,7 +119,8 @@ export function Step1PersonalInfo({ data, onNext }: Step1Props) {
     e.preventDefault();
     
     if (validateForm()) {
-      onNext(formData as PersonalInfo);
+      actions.updateStep(1, { personalInfo: formData as PersonalInfo });
+      actions.nextStep();
     }
   };
 
