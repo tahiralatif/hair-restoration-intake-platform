@@ -4,9 +4,10 @@ import { cn } from '@/lib/utils';
 
 interface FormFieldProps {
   label: string;
-  htmlFor: string;
+  htmlFor?: string;
   error?: string;
   required?: boolean;
+  hint?: string;
   description?: string;
   children: React.ReactNode;
   className?: string;
@@ -17,6 +18,7 @@ export function FormField({
   htmlFor,
   error,
   required,
+  hint,
   description,
   children,
   className,
@@ -27,8 +29,8 @@ export function FormField({
         {label}
         {required && <span className="text-danger">*</span>}
       </Label>
-      {description && (
-        <p className="text-sm text-muted-foreground">{description}</p>
+      {(description || hint) && (
+        <p className="text-sm text-muted-foreground">{description || hint}</p>
       )}
       {children}
       {error && (
