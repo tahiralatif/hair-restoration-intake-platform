@@ -6,6 +6,7 @@ import { Patient } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { StatCard } from '@/components/dashboard/StatCard';
 import { TrendingUp, Users, UserCheck, Calendar } from 'lucide-react';
+import { ChatbotButton } from '@/components/chat/ChatbotButton';
 
 export default function AdminDashboardPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -79,6 +80,9 @@ export default function AdminDashboardPage() {
           </Card>
         </div>
       </div>
+
+      {/* Admin AI Assistant */}
+      <ChatbotButton type="doctor" />
     </div>
   );
 }

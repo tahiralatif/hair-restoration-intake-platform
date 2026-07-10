@@ -5,6 +5,7 @@ import { mockDataStore } from '@/lib/mockData';
 import { Patient } from '@/lib/types';
 import { PatientCard } from '@/components/doctor/PatientCard';
 import { calculateAIScore } from '@/lib/aiScore';
+import { ChatbotButton } from '@/components/chat/ChatbotButton';
 
 export default function DoctorDashboardPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -42,6 +43,9 @@ export default function DoctorDashboardPage() {
           </div>
         )}
       </div>
+
+      {/* Doctor AI Assistant */}
+      <ChatbotButton type="doctor" />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AssessmentProvider } from "@/lib/contexts/AssessmentContext";
+import { Navbar } from "@/components/layout/Navbar";
 
 export const metadata: Metadata = {
   title: "Hair Restoration Assessment Platform",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <AssessmentProvider>
+          <Navbar />
           {children}
         </AssessmentProvider>
       </body>

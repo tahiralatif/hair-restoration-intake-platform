@@ -6,6 +6,7 @@ import { Patient } from '@/lib/types';
 import { PatientTable } from '@/components/clinic/PatientTable';
 import { StatCard } from '@/components/dashboard/StatCard';
 import { Users, UserCheck, Clock, Calendar } from 'lucide-react';
+import { ChatbotButton } from '@/components/chat/ChatbotButton';
 
 export default function ClinicDashboardPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -71,6 +72,9 @@ export default function ClinicDashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Clinic AI Assistant */}
+      <ChatbotButton type="doctor" />
     </div>
   );
 }

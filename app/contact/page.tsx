@@ -10,6 +10,7 @@ import {
   MessageCircle, Mail, Phone, MapPin, Clock, 
   Send, CheckCircle, AlertCircle 
 } from 'lucide-react';
+import { ChatbotButton } from '@/components/chat/ChatbotButton';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -305,6 +306,9 @@ export default function ContactPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Patient AI Chatbot */}
+      <ChatbotButton type="patient" />
     </div>
   );
 }

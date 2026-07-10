@@ -11,6 +11,7 @@ import { AIScoreDisplay } from '@/components/dashboard/AIScoreDisplay';
 import { RiskIndicatorBadge } from '@/components/dashboard/RiskIndicatorBadge';
 import { Calendar, MessageSquare, Phone, Mail } from 'lucide-react';
 import { calculateAIScore } from '@/lib/aiScore';
+import { ChatbotButton } from '@/components/chat/ChatbotButton';
 
 export default function PatientDashboardPage() {
   const params = useParams();
@@ -152,6 +153,9 @@ export default function PatientDashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Patient AI Chatbot */}
+      <ChatbotButton type="patient" patientId={patient.id} />
     </div>
   );
 }

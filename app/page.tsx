@@ -12,6 +12,7 @@ import {
   Sparkles, Camera, ClipboardList, Calendar, Star,
   ChevronDown, MessageCircle, Award, LogIn
 } from 'lucide-react';
+import { ChatbotButton } from '@/components/chat/ChatbotButton';
 
 export default function HomePage() {
   const router = useRouter();
@@ -442,6 +443,9 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* Patient AI Chatbot */}
+      <ChatbotButton type="patient" />
     </div>
   );
 }
