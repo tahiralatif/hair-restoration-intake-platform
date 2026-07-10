@@ -10,7 +10,7 @@ import { useAssessment } from '@/lib/contexts/AssessmentContext';
 import { 
   FileText, ArrowRight, Check, Clock, Shield, Users, 
   Sparkles, Camera, ClipboardList, Calendar, Star,
-  ChevronDown, MessageCircle, Award
+  ChevronDown, MessageCircle, Award, LogIn
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -67,6 +67,18 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white">
         <div className="max-w-7xl mx-auto px-4 py-20 sm:py-28">
+          {/* Login Button - Top Right */}
+          <div className="absolute top-4 right-4">
+            <Button
+              onClick={() => router.push('/login')}
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white/10"
+            >
+              <LogIn className="h-4 w-4 mr-2" />
+              Sign In
+            </Button>
+          </div>
+
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
               <Sparkles className="h-4 w-4" />
