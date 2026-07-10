@@ -36,31 +36,22 @@ const STEP_COMPONENTS: Record<number, React.ComponentType> = {
 export default function AssessmentStepPage() {
   const params = useParams();
   const router = useRouter();
-  const { state, actions } = useAssessment();
+  const { actions } = useAssessment();
 
   // Parse step number from URL
   const stepParam = params.step as string;
   const stepNumber = parseInt(stepParam, 10);
 
-  // Validate step number
+  // Validate step number and sync context on mount
   useEffect(() => {
     if (isNaN(stepNumber) || stepNumber < 1 || stepNumber > 9) {
       router.push('/assessment/1');
       return;
     }
 
-    // Sync URL with context state
-    if (state.currentStep !== stepNumber) {
-      actions.setCurrentStep(stepNumber);
-    }
-  }, [stepNumber, state.currentStep, actions, router]);
-
-  // Update URL when context step changes
-  useEffect(() => {
-    if (state.currentStep !== stepNumber && !isNaN(stepNumber)) {
-      router.push(`/assessment/${state.currentStep}`);
-    }
-  }, [state.currentStep, stepNumber, router]);
+    // Only sync context state with URL, don't redirect
+    actions.setCurrentStep(stepNumber);
+  }, [stepNumber, actions, router]);
 
   // Get the appropriate step component
   const StepComponent = STEP_COMPONENTS[stepNumber];
