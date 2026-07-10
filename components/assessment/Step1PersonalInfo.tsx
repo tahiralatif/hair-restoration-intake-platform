@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { PersonalInfo, Gender } from '@/lib/types';
 import { validateEmail, validatePhone, validateRequired, validateAge } from '@/lib/validation';
 import { useAssessment } from '@/lib/contexts/AssessmentContext';
+import { ArrowRight } from 'lucide-react';
 
 export function Step1PersonalInfo() {
   const { state, actions } = useAssessment();
@@ -125,113 +126,126 @@ export function Step1PersonalInfo() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* First Name */}
-        <FormField
-          label="First Name"
-          htmlFor="firstName"
-          required
-          error={errors.firstName}
-        >
-          <Input
-            id="firstName"
-            value={formData.firstName}
-            onChange={(e) => handleInputChange('firstName', e.target.value)}
-            placeholder="John"
-          />
-        </FormField>
-
-        {/* Last Name */}
-        <FormField
-          label="Last Name"
-          htmlFor="lastName"
-          required
-          error={errors.lastName}
-        >
-          <Input
-            id="lastName"
-            value={formData.lastName}
-            onChange={(e) => handleInputChange('lastName', e.target.value)}
-            placeholder="Doe"
-          />
-        </FormField>
-
-        {/* Email */}
-        <FormField
-          label="Email Address"
-          htmlFor="email"
-          required
-          error={errors.email}
-        >
-          <Input
-            id="email"
-            type="email"
-            value={formData.email}
-            onChange={(e) => handleInputChange('email', e.target.value)}
-            placeholder="john.doe@example.com"
-          />
-        </FormField>
-
-        {/* Phone */}
-        <FormField
-          label="Phone Number"
-          htmlFor="phone"
-          required
-          error={errors.phone}
-        >
-          <Input
-            id="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => handleInputChange('phone', e.target.value)}
-            placeholder="(555) 123-4567"
-          />
-        </FormField>
-
-        {/* Date of Birth */}
-        <FormField
-          label="Date of Birth"
-          htmlFor="dateOfBirth"
-          required
-          error={errors.dateOfBirth}
-          description={formData.age && formData.age > 0 ? `Age: ${formData.age} years` : undefined}
-        >
-          <Input
-            id="dateOfBirth"
-            type="date"
-            value={formData.dateOfBirth}
-            onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-            max={new Date().toISOString().split('T')[0]}
-          />
-        </FormField>
-
-        {/* Gender */}
-        <FormField
-          label="Gender"
-          htmlFor="gender"
-          required
-          error={errors.gender}
-        >
-          <Select
-            value={formData.gender}
-            onValueChange={(value) => handleInputChange('gender', value as Gender)}
+    <form onSubmit={handleSubmit} className="space-y-8">
+      {/* Personal Information Section */}
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* First Name */}
+          <FormField
+            label="First Name"
+            htmlFor="firstName"
+            required
+            error={errors.firstName}
           >
-            <SelectTrigger id="gender">
-              <SelectValue placeholder="Select gender" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="male">Male</SelectItem>
-              <SelectItem value="female">Female</SelectItem>
-              <SelectItem value="other">Other</SelectItem>
-            </SelectContent>
-          </Select>
-        </FormField>
+            <Input
+              id="firstName"
+              value={formData.firstName}
+              onChange={(e) => handleInputChange('firstName', e.target.value)}
+              placeholder="John"
+              className="h-12 text-base"
+            />
+          </FormField>
+
+          {/* Last Name */}
+          <FormField
+            label="Last Name"
+            htmlFor="lastName"
+            required
+            error={errors.lastName}
+          >
+            <Input
+              id="lastName"
+              value={formData.lastName}
+              onChange={(e) => handleInputChange('lastName', e.target.value)}
+              placeholder="Doe"
+              className="h-12 text-base"
+            />
+          </FormField>
+
+          {/* Email */}
+          <FormField
+            label="Email Address"
+            htmlFor="email"
+            required
+            error={errors.email}
+          >
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => handleInputChange('email', e.target.value)}
+              placeholder="john.doe@example.com"
+              className="h-12 text-base"
+            />
+          </FormField>
+
+          {/* Phone */}
+          <FormField
+            label="Phone Number"
+            htmlFor="phone"
+            required
+            error={errors.phone}
+          >
+            <Input
+              id="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => handleInputChange('phone', e.target.value)}
+              placeholder="(555) 123-4567"
+              className="h-12 text-base"
+            />
+          </FormField>
+
+          {/* Date of Birth */}
+          <FormField
+            label="Date of Birth"
+            htmlFor="dateOfBirth"
+            required
+            error={errors.dateOfBirth}
+            description={formData.age && formData.age > 0 ? `Age: ${formData.age} years` : undefined}
+          >
+            <Input
+              id="dateOfBirth"
+              type="date"
+              value={formData.dateOfBirth}
+              onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
+              max={new Date().toISOString().split('T')[0]}
+              className="h-12 text-base"
+            />
+          </FormField>
+
+          {/* Gender */}
+          <FormField
+            label="Gender"
+            htmlFor="gender"
+            required
+            error={errors.gender}
+          >
+            <Select
+              value={formData.gender}
+              onValueChange={(value) => handleInputChange('gender', value as Gender)}
+            >
+              <SelectTrigger id="gender" className="h-12 text-base">
+                <SelectValue placeholder="Select gender" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="male">Male</SelectItem>
+                <SelectItem value="female">Female</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormField>
+        </div>
       </div>
 
       {/* Address Section */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Address</h3>
+      <div className="space-y-6 pt-6 border-t border-gray-200">
+        <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span className="text-primary text-sm">📍</span>
+          </div>
+          Address Information
+        </h3>
         <div className="grid grid-cols-1 gap-6">
           <FormField
             label="Street Address"
@@ -244,6 +258,7 @@ export function Step1PersonalInfo() {
               value={formData.address?.street}
               onChange={(e) => handleAddressChange('street', e.target.value)}
               placeholder="123 Main St"
+              className="h-12 text-base"
             />
           </FormField>
 
@@ -259,6 +274,7 @@ export function Step1PersonalInfo() {
                 value={formData.address?.city}
                 onChange={(e) => handleAddressChange('city', e.target.value)}
                 placeholder="New York"
+                className="h-12 text-base"
               />
             </FormField>
 
@@ -273,6 +289,7 @@ export function Step1PersonalInfo() {
                 value={formData.address?.state}
                 onChange={(e) => handleAddressChange('state', e.target.value)}
                 placeholder="NY"
+                className="h-12 text-base"
               />
             </FormField>
 
@@ -287,6 +304,7 @@ export function Step1PersonalInfo() {
                 value={formData.address?.zipCode}
                 onChange={(e) => handleAddressChange('zipCode', e.target.value)}
                 placeholder="10001"
+                className="h-12 text-base"
               />
             </FormField>
           </div>
@@ -301,15 +319,17 @@ export function Step1PersonalInfo() {
               value={formData.address?.country}
               onChange={(e) => handleAddressChange('country', e.target.value)}
               placeholder="United States"
+              className="h-12 text-base"
             />
           </FormField>
         </div>
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-end pt-6">
-        <Button type="submit" size="lg" className="min-w-32">
-          Next
+      <div className="flex justify-end pt-6 border-t border-gray-200">
+        <Button type="submit" size="lg" className="min-w-40 h-12 text-base font-semibold">
+          Continue to Next Step
+          <ArrowRight className="h-5 w-5 ml-2" />
         </Button>
       </div>
     </form>

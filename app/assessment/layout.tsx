@@ -46,14 +46,14 @@ function AssessmentLayoutContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-primary mb-2">
+          <h1 className="text-3xl sm:text-4xl font-bold text-primary mb-2">
             Hair Restoration Assessment
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-base sm:text-lg">
             Complete your assessment to receive personalized recommendations
           </p>
         </div>
@@ -64,7 +64,7 @@ function AssessmentLayoutContent({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* Content Card */}
-        <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 mb-6">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8 lg:p-10 mb-6">
           {children}
         </div>
 
@@ -74,9 +74,9 @@ function AssessmentLayoutContent({ children }: { children: React.ReactNode }) {
             <Button
               variant="outline"
               onClick={handleSaveProgress}
-              className="text-sm"
+              className="text-sm border-2 hover:border-primary/50"
             >
-              Save & Continue Later
+              💾 Save & Continue Later
             </Button>
           </div>
         )}
@@ -85,17 +85,17 @@ function AssessmentLayoutContent({ children }: { children: React.ReactNode }) {
         <Dialog open={showSaveDialog} onOpenChange={setShowSaveDialog}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Progress Saved!</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-2xl">Progress Saved!</DialogTitle>
+              <DialogDescription className="text-base">
                 Your assessment progress has been saved. Use this code to resume later.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
               {/* Resume Code Display */}
-              <div className="flex items-center gap-2 p-4 bg-gray-100 rounded-lg">
+              <div className="flex items-center gap-2 p-6 bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl border-2 border-primary/20">
                 <div className="flex-1">
-                  <p className="text-xs text-gray-600 mb-1">Resume Code</p>
-                  <p className="text-2xl font-bold text-primary tracking-wider">
+                  <p className="text-xs text-gray-600 mb-2 font-medium">Resume Code</p>
+                  <p className="text-3xl font-bold text-primary tracking-wider font-mono">
                     {savedCode}
                   </p>
                 </div>
@@ -103,16 +103,16 @@ function AssessmentLayoutContent({ children }: { children: React.ReactNode }) {
                   variant="outline"
                   size="sm"
                   onClick={handleCopyCode}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 h-12 px-4"
                 >
                   {copied ? (
                     <>
-                      <Check className="h-4 w-4 mr-1" />
-                      Copied
+                      <Check className="h-4 w-4 mr-2" />
+                      Copied!
                     </>
                   ) : (
                     <>
-                      <Copy className="h-4 w-4 mr-1" />
+                      <Copy className="h-4 w-4 mr-2" />
                       Copy
                     </>
                   )}
@@ -120,18 +120,29 @@ function AssessmentLayoutContent({ children }: { children: React.ReactNode }) {
               </div>
 
               {/* Instructions */}
-              <div className="text-sm text-gray-600 space-y-2">
-                <p className="font-medium">Important:</p>
-                <ul className="list-disc list-inside space-y-1 ml-2">
-                  <li>Save this code in a secure location</li>
-                  <li>You can resume your assessment within 30 days</li>
-                  <li>Enter this code on the home page to continue</li>
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                <p className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                  <span className="text-blue-600">ℹ️</span> Important Information
+                </p>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>Save this code in a secure location</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>You can resume your assessment within 30 days</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>Enter this code on the home page to continue</span>
+                  </li>
                 </ul>
               </div>
 
               {/* Close Button */}
-              <Button onClick={handleCloseDialog} className="w-full">
-                Got it
+              <Button onClick={handleCloseDialog} className="w-full h-12 text-base font-semibold">
+                Got it, Thanks!
               </Button>
             </div>
           </DialogContent>
