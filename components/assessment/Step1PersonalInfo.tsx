@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FormField } from '@/components/ui/form-field';
@@ -11,6 +12,7 @@ import { useAssessment } from '@/lib/contexts/AssessmentContext';
 import { ArrowRight } from 'lucide-react';
 
 export function Step1PersonalInfo() {
+  const router = useRouter();
   const { state, actions } = useAssessment();
   const [formData, setFormData] = useState<Partial<PersonalInfo>>({
     firstName: state.formData.personalInfo?.firstName || '',
@@ -121,7 +123,8 @@ export function Step1PersonalInfo() {
     
     if (validateForm()) {
       actions.updateStep(1, { personalInfo: formData as PersonalInfo });
-      actions.nextStep();
+      // Navigate to step 2
+      router.push('/assessment/2');
     }
   };
 
