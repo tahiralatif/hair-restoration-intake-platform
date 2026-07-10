@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form-field';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -42,6 +43,7 @@ const AVAILABILITY_OPTIONS = [
 // ============================================================================
 
 export function Step8BudgetScheduling() {
+  const router = useRouter();
   const { state, actions } = useAssessment();
   const [formData, setFormData] = useState<BudgetScheduling>(
     state.formData.budgetScheduling || {
@@ -115,13 +117,13 @@ export function Step8BudgetScheduling() {
   const handleNext = () => {
     if (validateForm()) {
       actions.updateStep(8, { budgetScheduling: formData });
-      actions.nextStep();
+      router.push('/assessment/9');
     }
   };
 
   const handleBack = () => {
     actions.updateStep(8, { budgetScheduling: formData });
-    actions.previousStep();
+    router.push('/assessment/7');
   };
 
   // ============================================================================

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form-field';
 import { Textarea } from '@/components/ui/textarea';
@@ -34,6 +35,7 @@ const TIMELINE_OPTIONS: Array<{ value: TimelinePreference; label: string }> = [
 // ============================================================================
 
 export function Step7DesiredOutcome() {
+  const router = useRouter();
   const { state, actions } = useAssessment();
   const [formData, setFormData] = useState<DesiredOutcome>(
     state.formData.desiredOutcome || {
@@ -118,13 +120,13 @@ export function Step7DesiredOutcome() {
   const handleNext = () => {
     if (validateForm()) {
       actions.updateStep(7, { desiredOutcome: formData });
-      actions.nextStep();
+      router.push('/assessment/8');
     }
   };
 
   const handleBack = () => {
     actions.updateStep(7, { desiredOutcome: formData });
-    actions.previousStep();
+    router.push('/assessment/6');
   };
 
   // ============================================================================

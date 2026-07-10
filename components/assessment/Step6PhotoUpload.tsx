@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { PhotoUploader } from './PhotoUploader';
 import { useAssessment } from '@/lib/contexts/AssessmentContext';
@@ -39,6 +40,7 @@ const PHOTO_ANGLES: Array<{ key: PhotoAngle; label: string }> = [
 // ============================================================================
 
 export function Step6PhotoUpload() {
+  const router = useRouter();
   const { state, actions } = useAssessment();
   const [photos, setPhotos] = useState<PhotoUploadData>(state.formData.photos || {});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -107,13 +109,13 @@ export function Step6PhotoUpload() {
 
     // Save to context and move to next step
     actions.updateStep(6, { photos: photos as PatientPhotos });
-    actions.nextStep();
+    router.push('/assessment/7');
   };
 
   const handleBack = () => {
     // Save current progress even if incomplete
     actions.updateStep(6, { photos: photos as PatientPhotos });
-    actions.previousStep();
+    router.push('/assessment/5');
   };
 
   // ============================================================================
