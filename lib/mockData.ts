@@ -498,32 +498,32 @@ class MockDataStore {
       norwoodScale: params.norwoodScale,
       photos: {
         front: {
-          url: '/placeholder-photo.jpg',
+          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Front+View`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         top: {
-          url: '/placeholder-photo.jpg',
+          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Top+View`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         back: {
-          url: '/placeholder-photo.jpg',
+          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Back+View`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         left: {
-          url: '/placeholder-photo.jpg',
+          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Left+Side`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         right: {
-          url: '/placeholder-photo.jpg',
+          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Right+Side`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         closeup: {
-          url: '/placeholder-photo.jpg',
+          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Close+Up`,
           uploadedAt: submittedAt,
           size: 102400,
         },
@@ -563,22 +563,61 @@ class MockDataStore {
       staffNotes: params.status === 'Rejected' ? [
         {
           id: this.generateId(),
-          content: 'Insufficient donor area, budget too low for multiple sessions needed',
+          content: 'Initial review: Patient has advanced Norwood stage with limited donor area. Budget constraints identified.',
           authorId: 'staff-1',
-          authorName: 'Staff Member',
-          createdAt: new Date(submittedAt.getTime() + 172800000),
+          authorName: 'Jennifer Martinez (Staff)',
+          createdAt: new Date(submittedAt.getTime() + 86400000), // 1 day after
         },
-      ] : [],
+        {
+          id: this.generateId(),
+          content: 'Follow-up: Discussed budget options with patient. Current budget insufficient for multiple sessions needed to achieve desired outcome.',
+          authorId: 'staff-1',
+          authorName: 'Jennifer Martinez (Staff)',
+          createdAt: new Date(submittedAt.getTime() + 172800000), // 2 days after
+        },
+      ] : params.status === 'Qualified' || params.status === 'Booked' ? [
+        {
+          id: this.generateId(),
+          content: 'Initial screening complete. All medical requirements met. Patient shows realistic expectations.',
+          authorId: 'staff-1',
+          authorName: 'Jennifer Martinez (Staff)',
+          createdAt: new Date(submittedAt.getTime() + 86400000),
+        },
+        {
+          id: this.generateId(),
+          content: 'Photo quality verified. All 6 angles captured clearly. Patient profile forwarded to doctor for review.',
+          authorId: 'staff-2',
+          authorName: 'Sarah Johnson (Staff)',
+          createdAt: new Date(submittedAt.getTime() + 129600000), // 1.5 days after
+        },
+      ] : [
+        {
+          id: this.generateId(),
+          content: 'Application received and under preliminary review. Awaiting medical history verification.',
+          authorId: 'staff-1',
+          authorName: 'Jennifer Martinez (Staff)',
+          createdAt: new Date(submittedAt.getTime() + 43200000), // 12 hours after
+        },
+      ],
       doctorNotes: params.doctorId ? [
         {
           id: this.generateId(),
           content: params.status === 'Qualified' || params.status === 'Booked' 
-            ? 'Excellent candidate with realistic expectations' 
-            : 'Reviewing medical history',
+            ? `Medical review complete. Patient is an excellent candidate for FUE procedure. Norwood ${params.norwoodScale} with adequate donor density. Estimated graft count: ${params.norwoodScale === '2' || params.norwoodScale === '3' ? '1500-2000' : params.norwoodScale === '4' || params.norwoodScale === '5' ? '2500-3000' : '3500-4000'} grafts. Patient has realistic expectations and good overall health.`
+            : params.status === 'Under Review'
+            ? 'Reviewing medical history. Need clarification on current medications and any contraindications. Will schedule follow-up call with patient.'
+            : 'Patient case reviewed. Unfortunately not an ideal candidate at this time due to medical contraindications. Recommended alternative treatments discussed.',
           authorId: params.doctorId,
           authorName: params.doctorId === 'doc-1' ? 'Dr. Sarah Kim' : 'Dr. Michael Chen',
-          createdAt: new Date(submittedAt.getTime() + 259200000),
+          createdAt: new Date(submittedAt.getTime() + 259200000), // 3 days after
         },
+        ...(params.status === 'Booked' ? [{
+          id: this.generateId(),
+          content: 'Pre-operative consultation scheduled. Discussed surgical approach, expected timeline (6-8 hours), and post-op care requirements. Patient understands the process and recovery expectations.',
+          authorId: params.doctorId,
+          authorName: params.doctorId === 'doc-1' ? 'Dr. Sarah Kim' : 'Dr. Michael Chen',
+          createdAt: new Date(submittedAt.getTime() + 432000000), // 5 days after
+        }] : []),
       ] : [],
       appointments: params.hasAppointment ? [
         {
