@@ -498,32 +498,32 @@ class MockDataStore {
       norwoodScale: params.norwoodScale,
       photos: {
         front: {
-          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Front+View`,
+          url: `https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         top: {
-          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Top+View`,
+          url: `https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         back: {
-          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Back+View`,
+          url: `https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         left: {
-          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Left+Side`,
+          url: `https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=500&fit=crop`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         right: {
-          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Right+Side`,
+          url: `https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=500&fit=crop`,
           uploadedAt: submittedAt,
           size: 102400,
         },
         closeup: {
-          url: `https://via.placeholder.com/400x500/0F4C4C/FFFFFF?text=Close+Up`,
+          url: `https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=500&fit=crop`,
           uploadedAt: submittedAt,
           size: 102400,
         },
