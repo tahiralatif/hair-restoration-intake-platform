@@ -418,6 +418,7 @@ export default function HomePage() {
               variant="outline" 
               size="lg" 
               className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 h-auto"
+              onClick={() => router.push('/contact')}
             >
               <MessageCircle className="h-5 w-5 mr-2" />
               Contact Support
